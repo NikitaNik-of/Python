@@ -1,58 +1,67 @@
 import os
-import subprocess as sp
+import random
 
 
-def fileMake(fp):
-    if not(os.path.isfile(file_path)):
-        f = open(file_path, 'tw', encoding='utf-8')
+def fileRandom(fp):
+    names = ['Иван Иванович Карасев', 'Горацио Дмитриевич Дримов', 'Влад Владимирович Фоксеев',
+             'Анна Геннадьевна Мисува', 'Никита Анатольевич Титаников', 'Wilbur Soot Sandman']
+    if not (os.path.isfile(fp)):
+        f = open(fp, 'tw', encoding='utf-8')
         f.close()
-    print("\n\nЯ специально создал для вас файл, для удобного ввода матрицы.\nПожалуйста, введите квадратную матрицу, между элементами в строке - пробел, между столбцами - красная строка!")
-    sp.Popen(["notepad.exe", fp])
-    ans = input(
-        "Как только будете готовы, напишите Y, если хотите завершить программу - N >>")
-    if ans == "N" or ans == "n":
-        os.abort()
+    num = random.randint(1, 50)
+    file_data = []
+    for i in range(num):
+        person = []
+        person.append(names[random.randint(0, 5)])
+        person.append(random.randint(1, 5) * 10 + random.randint(1, 6))
+        luckyone = random.randint(0, 3)
+        if luckyone == 3:
+            person.append('5.0 ' * 3)
+        else:
+            person.append(round(random.randint(2, 4) + random.randint(0, 99) * 0.01, 2))
+            person.append(round(random.randint(2, 4) + random.randint(0, 99) * 0.01, 2))
+            person.append(round(random.randint(2, 4) + random.randint(0, 99) * 0.01, 2))
+            # person.append(round((person[2] + person[3] + person[4]) / 3, 2))
+        file_data.append(' '.join(map(str, person)) + ' \n')
+    with open(fp, 'tw', encoding='utf-8') as f:
+        f.writelines(file_data)
 
 
 def fileRead(fp):
-    with open(fp, 'r') as f:
-        try:
-            return [[int(num) for num in line.split(' ')] for line in f]
-        except ValueError:
-            print("\nОшибка чтения файла!\nНеверный формат данный при преобразовании в число. Программа завершилась.\n\n")
-            os.abort()
+    with open(fp, 'r', encoding='utf-8') as f:
+        return [[str(num) for num in line.split()] for line in f]
 
 
-def det(ar):
-    if len(ar) == 1:
-        return ar[0][0]
-    else:
-        s = 0
-        for i in range(len(ar)):
-            t = ar[0][i]
-            mt = [[ar[k][j] for k in range(len(ar)) if k > 0]
-                  for j in range(len(ar)) if j != i]
-            if i % 2 == 0:
-                s += t * det(mt)
-            else:
-                s -= t * det(mt)
-        return s
+def samoZachet(lt, fp):
+    f = open(fp, 'tw', encoding='utf-8')
+    f.write('1. Средний балл >4:\n')
+    for i in range(len(lt)):
+        mid = (float(lt[i][6]) + float(lt[i][5]) + float(lt[i][4])) / 3
+        if mid >= 4:
+            f.write(' '.join(lt[i]) + '\n')
+    f.write('\n')
+
+
+def select_sort(lt, fp):
+    mid = [round((float(lt[i][6]) + float(lt[i][5]) + float(lt[i][4])) / 3, 2) for i in range(len(lt))]
+    for step in range(len(lt)):
+        min = step
+        for i in range(step + 1, len(lt)):
+            if mid[i] < mid[min]:
+                min = i
+        (array[step], array[min]) = (array[min], array[step])
+        (mid[step], mid[min]) = (mid[min], mid[step])
+    with open(fp, 'a', encoding='utf-8') as f:
+        f.write('2. Сортировка Selection sort:\n')
+        for i in range(len(array)):
+            f.write(' '.join(array[i]) + '\n')
 
 
 file_path = "C://test.txt"
-b = False
-fileMake(file_path)
-mat = fileRead(file_path)
+output_path = "C://output.txt"
 
-for i in range(len(mat)):
-    if len(mat) != len(mat[i]):
-        b = True
-if b:
-    print("\nВы неверно ввели матрицу. Пожалуйста перепроверьте написание и пробелы, иначе пожалуйтесь на баг)\nПрограмма завершилась.\n\n")
-else:
-    print("\nДетерминант матрицы:", det(mat), end="\n\n")
+fileRandom(file_path)
+array = fileRead(file_path)
 
-
-# n = int(input("Матрица N x N: Введите n (int) >> "))
-# mat = [[int(input("Введите элементы матрицы: [" + str(j) + "," + str(i) + "] >> ")) for j in range(n)] for i in range(n)]
-# print("\nДетерминант матрицы:", det(mat))
+samoZachet(array, output_path)
+select_sort(array, output_path)
