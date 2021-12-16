@@ -1,4 +1,4 @@
 # Python
- - Personal problems
+ - Personal problems - Индивидуальные задания
    - table.py - Задание про таблицу и сортировку
    - matrix.py - Задание про подсчет определителя матрицы
