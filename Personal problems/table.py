@@ -1,5 +1,8 @@
 import os
 import random
+import time
+
+from numpy import sort
 
 
 def fileRandom(fp):
@@ -8,7 +11,7 @@ def fileRandom(fp):
     if not (os.path.isfile(fp)):
         f = open(fp, 'tw', encoding='utf-8')
         f.close()
-    num = random.randint(1, 50)
+    num = random.randint(100, 500)
     file_data = []
     for i in range(num):
         person = []
@@ -34,7 +37,7 @@ def fileRead(fp):
 
 def samoZachet(lt, fp):
     f = open(fp, 'tw', encoding='utf-8')
-    f.write('1. Средний балл >4:\n')
+    f.write('1. Средний балл >4:\n\n')
     for i in range(len(lt)):
         mid = (float(lt[i][6]) + float(lt[i][5]) + float(lt[i][4])) / 3
         if mid >= 4:
@@ -43,19 +46,31 @@ def samoZachet(lt, fp):
 
 
 def select_sort(lt, fp):
+    s_time = time.time_ns()
     mid = [round((float(lt[i][6]) + float(lt[i][5]) + float(lt[i][4])) / 3, 2) for i in range(len(lt))]
     for step in range(len(lt)):
         min = step
         for i in range(step + 1, len(lt)):
             if mid[i] < mid[min]:
                 min = i
-        (array[step], array[min]) = (array[min], array[step])
+        (lt[step], lt[min]) = (lt[min], lt[step])
         (mid[step], mid[min]) = (mid[min], mid[step])
     with open(fp, 'a', encoding='utf-8') as f:
-        f.write('2. Сортировка Selection sort:\n')
-        for i in range(len(array)):
-            f.write(' '.join(array[i]) + '\n')
+        f.write('\n2. Сортировка Selection sort:\n\n')
+        for i in range(len(lt)):
+            f.write(' '.join(lt[i]) + '\n')
+    print(time.time_ns() - s_time)
 
+
+def def_sort(lt, fp):
+    s_time = time.time_ns()
+    mid = [(round((float(lt[i][6]) + float(lt[i][5]) + float(lt[i][4])) / 3, 2), i) for i in range(len(lt))]
+    mid.sort()
+    with open(fp, 'a', encoding='utf-8') as f:
+        f.write('\n3. Сортировка default sort:\n\n')
+        for i in mid:
+            f.write(' '.join(lt[i[1]]) + '\n')
+    print(time.time_ns() - s_time)
 
 file_path = "C://test.txt"
 output_path = "C://output.txt"
@@ -64,4 +79,5 @@ fileRandom(file_path)
 array = fileRead(file_path)
 
 samoZachet(array, output_path)
-select_sort(array, output_path)
+select_sort(array.copy(), output_path)
+def_sort(array.copy(), output_path)
