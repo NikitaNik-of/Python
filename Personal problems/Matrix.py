@@ -1,5 +1,6 @@
 import os
 import subprocess as sp
+from tokenize import blank_re
 
 
 def fileMake(fp):
@@ -23,20 +24,27 @@ def fileRead(fp):
             os.abort()
 
 
-def det(ar):
+def det(ar, t):
+    ad = []
     if len(ar) == 1:
-        return ar[0][0]
+        return ar[0][0], [ar[0][0]]
     else:
         s = 0
         for i in range(len(ar)):
-            t = ar[0][i]
+            a = ar[0][i]
             mt = [[ar[k][j] for k in range(len(ar)) if k > 0]
                   for j in range(len(ar)) if j != i]
             if i % 2 == 0:
-                s += t * det(mt)
+                d, emp = det(mt, 1)
+                s += a * d 
+                if t == 0:
+                    ad.append(d)
             else:
-                s -= t * det(mt)
-        return s
+                d, emp = det(mt, 1)
+                s -= a * d
+                if t == 0:
+                    ad.append(d * -1)
+        return s, ad
 
 
 file_path = "C://test.txt"
@@ -50,7 +58,9 @@ for i in range(len(mat)):
 if b:
     print("\nВы неверно ввели матрицу. Пожалуйста перепроверьте написание и пробелы, иначе пожалуйтесь на баг)\nПрограмма завершилась.\n\n")
 else:
-    print("\nДетерминант матрицы:", det(mat), end="\n\n")
+    dt, algdop =  det(mat, 0)
+    print("\nДетерминант матрицы:", dt, end="")
+    print("\nАлгебраические дополнения для первой строки:", algdop, end="\n\n")
 
 
 # n = int(input("Матрица N x N: Введите n (int) >> "))
