@@ -1,6 +1,5 @@
 from math import *
-
-from numpy import arccos
+from numpy import *
 
 print('Формат строки: вводятся координаты вершины.')
 trg = [[int(j) for j in input(str(i + 1) +') x, y = ').split()] for i in range(3)]
