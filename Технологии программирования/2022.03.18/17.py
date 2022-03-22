@@ -1,0 +1,1 @@
+print(len({w for w in input("str > ").split()}))
