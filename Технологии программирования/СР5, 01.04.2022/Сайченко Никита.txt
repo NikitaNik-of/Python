@@ -1,7 +1,7 @@
                   Вариант 1
 ############################################
 
-Ссылка на Python: https://github.com/NikitaNik-of/Python
+Ссылка на Python: https://github.com/NikitaNik-of/Python 
 Путь: Python/Технологии программирования/СР5, 01.04.2022/
 
 ----------------     №1     ----------------
