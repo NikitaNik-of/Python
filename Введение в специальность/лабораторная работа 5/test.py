@@ -12,7 +12,7 @@ label_01 = r'$\sin({t}) + \cos({t}) + \cos({2t})$'
 label_02 = r'$\cos{(2t)} + \sin{[\cos{(t)}]}$'
 ax04.plot(t, x, linewidth=1.0, linestyle='-', marker='None', label=label_01)
 ax04.plot(t, y, linewidth=0.5, linestyle='-', marker='.', markevery=4, markersize=3, label=label_02)
-ax04.legend(ncol=2, title='Легенда', framealpha=0.7, fontsize=12)
+ax04.legend(ncol=1, title='Легенда', framealpha=1, fontsize=8)
 
 xticks = np.linspace(-4*np.pi, 4*np.pi, 9)
 xtickslabels = []
