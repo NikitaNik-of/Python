@@ -1,0 +1,81 @@
+                  Вариант 1
+############################################
+
+Ссылка на Python: https://github.com/NikitaNik-of/Python 
+Путь: Python/Технологии программирования/СР6, 15.04.2022/
+
+----------------     №1     ----------------
+import json as jn
+
+s = input('str 1 key:value \w spaces> ')
+dic = dict()
+for _ in s.split():
+    st = _.split(':')
+    dic[st[0]] = int(st[1])
+
+s = input('str 2 key:value > ')
+dic2 = dict()
+for _ in s.split():
+    st = _.split(':')
+    dic2[st[0]] = int(st[1])
+
+for key in dic2.keys():
+    if key not in dic: dic[key] = dic2[key]
+    else: dic[key] -= dic2[key]
+
+print(jn.dumps(dic, sort_keys=True, indent=2))
+
+----------------     №2     ----------------
+import json as jn
+
+def sort_key(t):
+    return t[1]
+
+
+st = input('mega text input in str /w spaces >> ')
+dic = dict()
+for w in sorted(st.split(), reverse=True):
+    if dic.get(w.lower(), 'None') == 'None':
+        dic[w.lower()] = 1
+    else: dic[w.lower()] += 1
+
+dic = dict(reversed(sorted(dic.items(), key=sort_key)))
+print(jn.dumps(dic, indent=2))
+
+----------------     №3     ----------------
+import json as jn
+
+s = input('str key:value \w spaces> ')
+dic = dict([(int(w.split(':')[0]), w.split(':')[1]) for w in s.split()])
+
+print(jn.dumps(dic, sort_keys=True, indent=2))
+
+----------------     №4     ----------------
+⚠ Требуется файл для работы (В репозитории можно найти пример) ⚠
+⚠ Проверьте верный путь к файлу ⚠
+
+import json
+with open("Технологии программирования\\СР6, 15.04.2022\\table.txt", 'r+') as f:
+    n = int(f.readline())
+    m = int(f.readline())
+    c = ['C' + str(_ + 1) for _ in range(n)]
+    v = ['V' + str(_ + 1) for _ in range(m)]
+    c_data = [ dict( zip(v, list(map(float, f.readline().split())))) for _ in range(n)]
+    table = dict(zip(c, c_data))
+    print(json.dumps(table, sort_keys=True, indent=4))
+
+# Вопрос
+q = int(input('V1 > ? | >> '))
+vi = 'V1'
+for i in range(1, n + 1):
+    if table['C' + str(i)][vi] > q: print(table['C' + str(i)])
+
+q2 = int(input('V2 == ? | >> '))
+vi2 = 'V2'
+for i in range(1, n + 1):
+    if table['C' + str(i)][vi2] == q2: print(table['C' + str(i)])
+
+q = int(input('\nV1 > ? | >> '))
+q2 = int(input('+ V2 < ? | >> '))
+for i in range(1, n + 1):
+    if (table['C' + str(i)][vi2] < q2) and (table['C' + str(i)][vi] > q): print(table['C' + str(i)])
