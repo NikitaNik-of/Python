@@ -21,7 +21,7 @@ for i in range(n + 1):
     M.append(mi)
 
 X = np.linalg.solve(M, np.array(pts[1]))
-x = np.linspace(np.min(pts[0]) - 2, np.max(pts[0]) + 2, 100)
+x = np.linspace(np.min(pts[0]) - 5, np.max(pts[0]) + 5, 100)
 
 fig = plt.figure(10)
 ax = fig.add_subplot(1, 1, 1)
