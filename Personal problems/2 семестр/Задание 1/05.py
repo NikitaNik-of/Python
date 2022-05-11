@@ -45,8 +45,8 @@ ax = fig.add_subplot(2, 1, 1)
 ax2 = fig.add_subplot(2, 1, 2)
 ax.grid(True)
 ax2.grid(True)
-ax.scatter(x, y, color='blue', marker='.', linewidth=0.5)
-ax2.scatter(x, s_y, color='green', marker='.', linewidth=0.5)
+ax.scatter(x, y, color='blue', marker='.', linewidth=0.5) # Сама последовательность
+ax2.scatter(x, s_y, color='green', marker='.', linewidth=0.5) # Сумма элементов последовательности
 ax.plot(np.linspace(0, len(x)*1.05), np.linspace(lim_f, lim_f), linewidth=1.5, color='red')
 
 plt.show()
