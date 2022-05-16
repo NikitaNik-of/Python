@@ -90,7 +90,7 @@ ax = fig.add_subplot(1, 1, 1)
 ax.grid(True)
 ax.plot(x, y, linewidth=1.5, color='red')
 # ax.plot(x, dir1, linewidth=0.5, color='green')
-# ax.plot(x_m, g_x(x_m, X_m), linewidth=1, color='black')
+ax.plot(x_m, g_x(x_m, X_m), linewidth=1, color='black')
 ax.scatter(pts_[0], pts_[1], linewidth=1, color='blue', marker='*')
 
 plt.show()

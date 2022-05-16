@@ -11,6 +11,7 @@ delta = 10
 i = 0
 dx = 1e-5
 x0 = float(input('float, x to ? >> '))
+
 while delta > dx:
     i -= 1
     delta = f_x(x0 + 10 ** i) - f_x(x0 - 10 ** i)

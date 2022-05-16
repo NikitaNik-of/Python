@@ -21,7 +21,7 @@ while True:
         else:
             try:
                 stack.append(int(ql[1]))
-                print('Добавлен элемент {ql[1]} в стек')
+                print(f'Добавлен элемент {ql[1]} в стек')
             except ValueError:
                 print('Ошибка: ValueError')
     elif ql[0] == 'pop':

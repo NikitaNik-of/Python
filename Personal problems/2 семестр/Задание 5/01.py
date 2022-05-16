@@ -43,7 +43,7 @@ for x0 in range(len(y1)):
             pts[1][-1] = 0.5 * (pts[1][-1] + f_x(xt))
             pts[2][-1] = x0
 
-# Поиск доп. точек
+# Поиск 2-x доп. точек
 x_t = pts[0][-1] + abs(pts[0][-1] - pts[0][-2])
 pts[0].append(x_t)
 pts[1].append(f_x(x_t))
@@ -61,7 +61,7 @@ for i in range(len(pts[0])):
 X_m = np.linalg.solve(M, np.array(pts[1]))
 x_m = np.linspace(np.min(pts[0]) - 0.15, np.max(pts[0]) + 0.15, 100)
 
-# Построение графика
+# Построение графиков
 fig = plt.figure(10)
 ax = fig.add_subplot(1, 1, 1)
 ax.grid(True)

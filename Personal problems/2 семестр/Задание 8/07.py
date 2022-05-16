@@ -1,14 +1,11 @@
+import matplotlib.pyplot as plt
 import numpy as np
 from math import *
-import matplotlib.pyplot as plt
+from sympy import *
 
-# Ввод функциq
-def f_x(x: float):
-    # return x ** 2 + 16 / x - 16
-    if x >= 3:
-        return (2 * (x**2) * (x - 3)) ** (1/3)
-    if x < 3:
-        return (2 * (x**2) * (3 - x)) ** (1/3) * -1
+def f_x(x):
+    y = (1 + 1/x)**2
+    return y
 
 
 def g_x(x: np.linspace, a: list):
@@ -38,21 +35,22 @@ def fmax(x_l, x_r):
     return x_c
 
 
-dx = 0.001
-x = np.linspace(-1.3, 6.3, 200)
-y = np.array([f_x(t) for t in x])
+dx = 1e-3
+x = np.linspace(-3, 4, 1000)
+y = f_x(x)
 
 # Поиск min max по отрезкам
 k = 40
-ar = [float(-1 + (7 * i / k)) for i in range(k + 1)]
+ar = [float(-3 + (7 * i / k)) for i in range(k + 1)]
 pts = [[], []]
 for i in range(len(ar) - 1):
-    mn = fmin(ar[i], ar[i + 1])
-    mx = fmax(ar[i], ar[i + 1])
-    pts[0].append(mn)
-    pts[1].append(f_x(mn))
-    pts[0].append(mx)
-    pts[1].append(f_x(mx))
+    if not((-0.25 < ar[i] < 0.5) or (-0.25 < ar[i + 1] < 0.5)):
+        mn = fmin(ar[i], ar[i + 1])
+        mx = fmax(ar[i], ar[i + 1])
+        pts[0].append(mn)
+        pts[1].append(f_x(mn))
+        pts[0].append(mx)
+        pts[1].append(f_x(mx))
 
 # Небольшая сортировка по x
 for i in range(len(pts[0])):
@@ -71,11 +69,16 @@ for i in range(len(pts[0])):
         pts_[0].append(pts[0][i])
         pts_[1].append(pts[1][i])
 
-# Построение графика
+# Графики
 fig = plt.figure(10)
 ax = fig.add_subplot(1, 1, 1)
 ax.grid(True)
-ax.plot(x, y, linewidth=1.5, color='red')
-ax.scatter(pts_[0], pts_[1], linewidth=1, color='blue', marker='*')
+x1 = np.linspace(-3, -0.25, 100)
+x2 = np.linspace(0.5, 4, 100)
+y1 = f_x(x1)
+y2 = f_x(x2)
+ax.plot(x1, y1, linewidth=1.5, color='red')
+ax.plot(x2, y2, linewidth=1.5, color='red')
+ax.scatter(pts_[0], pts_[1], linewidth=1, color='blue', marker='o')
 
 plt.show()
