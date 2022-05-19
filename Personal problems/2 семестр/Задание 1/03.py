@@ -9,7 +9,7 @@ def f_n(n: int):
 # Константы для работы алгоритмов
 b = True
 N_eps = 1
-eps = 1e-6
+eps = 1e-4
 delta = 0
 x, y = [], []
 
@@ -26,7 +26,7 @@ while b:
     x.append(N_eps)
     y.append(float(an))
     if (delta > 0) and (delta < eps): b = False
-lim_f = round(y[-1], 2)
+lim_f = round(y[-1], 1)
 print(an, delta, N_eps)
 print(lim_f)
 

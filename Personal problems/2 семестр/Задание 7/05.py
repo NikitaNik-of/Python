@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from math import *
-# from sympy import *
 
 def f_x(x):
     y = 6 * (np.e ** (x - 1)) - 3 * x - x**3
