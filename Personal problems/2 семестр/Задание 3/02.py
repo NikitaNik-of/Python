@@ -26,6 +26,11 @@ print(dir, f_x(x0))
 m = f_x(x0) - (dir * x0)
 y2 = dir * x + m
 
+# Формирование нормали
+k = -1 / dir
+m = f_x(x0) - (k * x0)
+y3 = k * x + m
+
 # Построение графика функции с производной
 fig = plt.figure(10)
 ax = fig.add_subplot(1, 1, 1)
@@ -34,5 +39,6 @@ ax.plot(x0, f_x(x0), marker='*')
 ax.plot(xl, yl, linewidth=1.5, color='black')
 ax.plot(xr, yr, linewidth=1.5, color='black')
 ax.plot(x, y2, linewidth=1, color="green")
+ax.plot(x, y3, linewidth=1, color="red")
 
 plt.show()
