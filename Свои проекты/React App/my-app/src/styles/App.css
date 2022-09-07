@@ -59,3 +59,20 @@
   opacity: 0;
   transition: opacity 500ms ease-in;
 }
+
+.page__wrapper{
+  margin-top: 30px;
+  display: flex;
+}
+
+.page{
+  margin: 2px;
+  padding: 10px;
+  border: 1px solid teal;
+  cursor: pointer;
+}
+
+.page__current{
+  border: 2px solid orange;
+  font-weight: bold;
+}
