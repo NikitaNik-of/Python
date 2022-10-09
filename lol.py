@@ -27,12 +27,16 @@ for i in range(1, m):
 
 ansX = []
 k = n
-for i in range(1, m + 1):
+for i in range(m - 1):
     for j in range(k):
-        if ansTab[m - i - 1][k - j - 1] + f(m - i+1, j) == ansTab[m-i][k-j-1]:
+        sumC = ansTab[m - i - 2][k - j - 1] + f(m - i, j)
+        check = ansTab[m - i - 1][k - 1]
+        if sumC == check:
             k = k - j
             ansX.append(j)
             break
+    if i == m: ansX.append(k)        
+
         
 
 print(ansTab, ansX)    

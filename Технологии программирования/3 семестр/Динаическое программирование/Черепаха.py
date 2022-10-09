@@ -5,6 +5,7 @@ n = int(input('Количество строк \ int >> '))
 m = int(input('Количество столбцов \ int >> '))
 
 ans = [[0 for __ in range(n)] for _ in range(m)]
+cordAns = []
 
 price = [[randrange(10, 50) for __ in range(n)] for _ in range(m)]
 ans[0][0] = [1, price[0][0]];
